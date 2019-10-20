@@ -1,0 +1,26 @@
+(rule
+ (targets VisitorsCompatibility.ml)
+ (deps (:in VisitorsCompatibility.cppo.ml))
+ (action
+  (run %{bin:cppo} -V OCAML:%{ocaml_version} %{in} -o %{targets})))
+
+(library
+ (name ppx)
+ (public_name visitors.ppx)
+ (kind ppx_deriver)
+ (libraries compiler-libs.common ppx_deriving.api)
+ (modules
+   Visitors
+   VisitorsAnalysis
+   VisitorsCompatibility
+   VisitorsGeneration
+   VisitorsList
+   VisitorsPlugin
+   VisitorsSettings
+   VisitorsString))
+
+(library
+ (name runtime)
+ (public_name visitors.runtime)
+ (modules VisitorsRuntime)
+ (wrapped false))
