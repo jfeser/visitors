@@ -5,6 +5,8 @@
 *.native
 _build*
 *.processed.ml
+.merlin
+*.install
 
 # MacOS:
 .DS_Store
