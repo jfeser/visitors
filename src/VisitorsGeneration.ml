@@ -29,13 +29,13 @@ type expressions = expression list
 
 (* -------------------------------------------------------------------------- *)
 
-(* We normally place a [Pervasives] prefix in front of OCaml's operators, so as
+(* We normally place a [Stdlib] prefix in front of OCaml's operators, so as
    to ensure that our code makes sense even if these operators are shadowed by
    the user. (That said, we still run into trouble if the user shadows the name
-   [Pervasives] itself.) *)
+   [Stdlib] itself.) *)
 
 (* When producing code for inclusion in the documentation, we remove the
-   [Pervasives] prefix, just so that things look pretty. We rely on an
+   [Stdlib] prefix, just so that things look pretty. We rely on an
    undocumented environment variable to toggle this behavior. *)
 
 let pervasive (x : string) : Longident.t =
@@ -44,8 +44,8 @@ let pervasive (x : string) : Longident.t =
     Lident x
       (* danger: the name [x] must not be shadowed. *)
   with Not_found ->
-    Ldot (Lident "Pervasives", x)
-      (* danger: the name [Pervasives] must not be shadowed. *)
+    Ldot (Lident "Stdlib", x)
+      (* danger: the name [Stdlib] must not be shadowed. *)
 
 (* We normally place an improbable prefix in front of our private (local)
    variables, so as to make sure that we do not shadow user variables that
